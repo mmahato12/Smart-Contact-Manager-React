@@ -11,8 +11,6 @@ import com.mkm.models.Contact;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Integer>{
-		
-		
-//		public List <Integer> findByUsername(String username);
-		Optional<Contact> findByName(String name);
+	public List <Contact> findByUser_id(Integer Id);
+	Optional<Contact> findByName(String name);
 }

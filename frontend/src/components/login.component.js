@@ -63,7 +63,7 @@ const Login = ({ change }) => {
                 <input type="password" id="password" className="form-control" onChange={handleChange} placeholder="Enter the Password"/>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
             </>
         )

@@ -3,26 +3,30 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const NavBar = ({ isAuthenticated }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
   console.log("isAuthenticated : ", isAuthenticated);
     return (
         isAuthenticated ? (
         <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
         <div className="container-fluid">
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li className="nav-item">
             <div >
             <NavLink to="/" className={"nav-link"}>Home</NavLink>
             </div>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <NavLink className={"nav-link"} to="/CreateContact">Create Contact</NavLink>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <NavLink className={"nav-link"} to="/logout">LogOut</NavLink>
           </li>
 
-          <li class="nav-item">
+          <li className="nav-item">
             <NavLink className={"nav-link"} to="/test">Test</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className={"nav-link"} to={`/profile/${user.id}`}>Profile</NavLink>
           </li>
         </ul>
         </div>

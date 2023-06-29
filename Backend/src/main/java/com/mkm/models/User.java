@@ -26,6 +26,8 @@ public class User {
 	
 	String password;
 	
+	String imagePath;
+	
 	@ManyToMany(fetch = FetchType.LAZY)
 	  @JoinTable(  name = "user_roles", 
 	        joinColumns = @JoinColumn(name = "user_id"), 
@@ -98,4 +100,20 @@ public class User {
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
 	}
+	
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", imagePath=" + imagePath + ", roles=" + roles + ", contacts=" + contacts + "]";
+	}
+	
+	
 }

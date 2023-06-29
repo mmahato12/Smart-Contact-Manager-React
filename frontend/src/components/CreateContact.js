@@ -53,7 +53,7 @@ const createContact = () => {
                 <input type="text" id="phone" onChange={handleChange} className="form-control" placeholder='Enter the Phone Number'/>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
             </>
         )    

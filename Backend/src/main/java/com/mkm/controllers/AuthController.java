@@ -1,5 +1,6 @@
 package com.mkm.controllers;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,11 +15,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mkm.models.ERole;
 import com.mkm.models.Role;
@@ -29,8 +33,10 @@ import com.mkm.payload.response.JwtResponse;
 import com.mkm.payload.response.MessageResponse;
 import com.mkm.dao.RoleRepository;
 import com.mkm.dao.UserRepository;
+import com.mkm.dto.UsertestDto;
 import com.mkm.security.jwt.JwtUtils;
 import com.mkm.security.services.UserDetailsImpl;
+import com.mkm.services.FileUploadUtil;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -73,8 +79,15 @@ public class AuthController {
   }
 
   @PostMapping("/signup")
-  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+  public ResponseEntity<?> registerUser(@RequestPart("Image") MultipartFile image, @RequestPart("data") SignupRequest signUpRequest) throws IOException  {
+//	  @RequestPart("Image") MultipartFile image, @RequestPart("data") UsertestDto usertestDto
 	  System.out.print(signUpRequest);
+	  
+	  String imageName = StringUtils.cleanPath(image.getOriginalFilename());
+      String filePath = imageName;
+      
+      FileUploadUtil.saveFile(imageName, image);
+      
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       return ResponseEntity
           .badRequest()
@@ -129,7 +142,10 @@ public class AuthController {
     }
 
     user.setRoles(roles);
+    user.setImagePath(filePath);
+    System.out.print("Wait ..!!\n");
     userRepository.save(user);
+    System.out.print("Done ..!!\n");
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }

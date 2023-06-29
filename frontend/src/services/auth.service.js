@@ -23,13 +23,22 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  register(username, email, password) {
+  register(username, email, password, image) {
     console.log(username + " " + email + " " + password);
-    return axios.post(API_URL + "/signup", {
+    const data = {
       username,
       email,
       password
-    });
+    };
+    const data1 = new Blob([JSON.stringify(data)], { type: 'application/json' });
+
+        const formData = new FormData();
+        formData.append('Image', image);
+        formData.append('data', data1);
+
+    console.log("Here\n");
+
+    return axios.post(API_URL + "/signup", formData);
   }
 
   getCurrentUser() {

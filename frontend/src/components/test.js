@@ -37,7 +37,7 @@ const test = () => {
             } 
         }
         console.log(contact);
-        axios.post("http://localhost:8082/api/usertest/data",
+        axios.post("http://localhost:8082/api/auth/signup",
         formData,
         config,
         )
@@ -72,7 +72,7 @@ const test = () => {
                 <input type="file" id="image" onChange={handleImageChange} className="form-control" placeholder='Enter the Image Url'/>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Submit</button>
             </form>
             </>
         )    

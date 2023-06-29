@@ -49,7 +49,7 @@ const Home = () => {
     <>
       <h2 className="text-center">Contact List</h2>
       <table className="table table-hover">
-        <thead class="table-success">
+        <thead className="table-success">
           <tr>
             <th>Name</th>
             <th>Phone Number</th>
@@ -65,7 +65,7 @@ const Home = () => {
                 <td>{contact.name}</td>
                 <td>{contact.phone}</td>
                 <td>{contact.description}</td>
-                <td class="d-flex">
+                <td className="d-flex">
                   <button className="btn btn-outline-info d-inline-block" onClick={() => editContact(contact.id)} >Edit</button>
                   <button className="btn btn-outline-danger d-inline-block" onClick={() => deleteItem(contact.id)}>Delete</button>
                 </td>

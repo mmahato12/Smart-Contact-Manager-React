@@ -13,6 +13,8 @@ import EventBus from "./common/EventBus";
 import AuthService from "./services/auth.service";
 
 import Test from "./components/test";
+import Profile from "./components/profile";
+import EditUser from "./components/EditUser";
 
 
 const App = () => {
@@ -43,6 +45,7 @@ const App = () => {
     return (
         <BrowserRouter>
         <NavBar isAuthenticated={isAuthenticated} />
+
         <div className="container mt-3">
         <Routes>
             <Route exact path="/Login" element={<Login change={change}/> } />
@@ -55,6 +58,8 @@ const App = () => {
                         <Route path="/EditContact/:id" element={<EditContact/>} />
                         <Route path="/logout" element={<LogOut/>} />
                         <Route path="/test" element={<Test/>} />
+                        <Route path="/profile/:id" element={<Profile/>} />
+                        <Route path="/EditUser/:id" element={<EditUser/>} />
                     </>
                 ) : (
                     <Route path = "*" element={<Navigate to="/login" replace /> }/>

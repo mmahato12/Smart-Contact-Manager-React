@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 import authService from "../services/auth.service";
 
 const Register = () => {
+  const navigate = useNavigate();
     const [registerObject, setRegisterObject] = useState({
         username: "",
         email: "",
@@ -11,9 +13,15 @@ const Register = () => {
         successful: false,
         message: ""
       });
+      const [image, setImage] = useState(null);
     
     const handleChange = (e) => {
         setRegisterObject(prevState => ({...prevState, [e.target.id]: e.target.value}));
+    }
+
+    const handleImageChange = (e) => {
+      console.log(e.target.files[0]);
+      setImage(e.target.files[0]);
     }
     
     const handleSubmit = (e) => {
@@ -22,13 +30,15 @@ const Register = () => {
         authService.register(
             registerObject.username,
             registerObject.email,
-            registerObject.password
+            registerObject.password,
+            image
         ).then(
             response => {
                 setRegisterObject({
                     message: response.data.message,
                     successful: true
                 });
+                navigate("/");
             },
             error => {
                 const resMessage =
@@ -65,7 +75,12 @@ const Register = () => {
             <input type="password" id="password" onChange={handleChange} className="form-control" placeholder="Enter the Phone Number"/>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div className="mb-3">
+            <label htmlFor="image" className="form-label">Image Url:</label>
+            <input type="file" id="image" onChange={handleImageChange} className="form-control" placeholder='Enter the Image Url'/>
+            </div>
+
+            <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         </>
     )
