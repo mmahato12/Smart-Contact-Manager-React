@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
 const createContact = () => {
+    const navigate = useNavigate();
     const [contact, setContact] = useState({});
 
     const handleChange = (e) => {
@@ -30,6 +32,7 @@ const createContact = () => {
         .then((res) => {
           console.log("Data Saved");
           console.log(res.data);
+          navigate("/");
         });
     }
 

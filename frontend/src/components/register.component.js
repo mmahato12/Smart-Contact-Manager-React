@@ -72,12 +72,12 @@ const Register = () => {
 
             <div className="mb-3">
             <label htmlFor="password" className="form-label">Password :</label>
-            <input type="password" id="password" onChange={handleChange} className="form-control" placeholder="Enter the Phone Number"/>
+            <input type="password" id="password" onChange={handleChange} className="form-control" placeholder="Enter the Password"/>
             </div>
 
             <div className="mb-3">
             <label htmlFor="image" className="form-label">Image Url:</label>
-            <input type="file" id="image" onChange={handleImageChange} className="form-control" placeholder='Enter the Image Url'/>
+            <input type="file" id="image" onChange={handleImageChange} className="form-control" placeholder='Upload Image'/>
             </div>
 
             <button type="submit" className="btn btn-primary">Submit</button>

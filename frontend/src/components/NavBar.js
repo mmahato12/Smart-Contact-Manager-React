@@ -22,9 +22,7 @@ const NavBar = ({ isAuthenticated }) => {
             <NavLink className={"nav-link"} to="/logout">LogOut</NavLink>
           </li>
 
-          <li className="nav-item">
-            <NavLink className={"nav-link"} to="/test">Test</NavLink>
-          </li>
+
           <li className="nav-item">
             <NavLink className={"nav-link"} to={`/profile/${user.id}`}>Profile</NavLink>
           </li>

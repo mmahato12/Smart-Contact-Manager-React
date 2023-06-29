@@ -6,8 +6,8 @@ const LogOut = ({ change }) => {
     const navigate = useNavigate();
     useEffect(()=> {
             console.log("log Out");
-            navigate("/login");
             eventBus.dispatch("logout");
+            navigate("/login");
             change(false);
         }
     )

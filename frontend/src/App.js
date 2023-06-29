@@ -12,7 +12,6 @@ import NavBar from "./components/NavBar";
 import EventBus from "./common/EventBus";
 import AuthService from "./services/auth.service";
 
-import Test from "./components/test";
 import Profile from "./components/profile";
 import EditUser from "./components/EditUser";
 
@@ -57,7 +56,6 @@ const App = () => {
                         <Route path="/CreateContact" element={<CreateContact/>} />
                         <Route path="/EditContact/:id" element={<EditContact/>} />
                         <Route path="/logout" element={<LogOut/>} />
-                        <Route path="/test" element={<Test/>} />
                         <Route path="/profile/:id" element={<Profile/>} />
                         <Route path="/EditUser/:id" element={<EditUser/>} />
                     </>
