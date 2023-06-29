@@ -59,6 +59,7 @@ const EditUser = () => {
         .then((res) => {
           console.log("Data Saved");
           console.log(res.data);
+          navigate(`/profile/${user.id}`)
         });
     }
         return (
