@@ -40,7 +40,7 @@ const Login = ({ change }) => {
                 error.message ||
                 error.toString();
     
-              this.setState({
+                setLoginObject({
                 loading: false,
                 message: resMessage
               });

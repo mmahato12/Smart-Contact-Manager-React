@@ -1,11 +1,12 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8282/api/test/';
+const API_URL = `http://localhost:8082/api/user/contacts`;
 
 class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + 'all');
+  getContacts(pageSize, page, sortBy, sortDir, query) {
+    return axios.get(API_URL + `?pageSize=${pageSize}&pageNo=${page}&sortBy=${sortBy}&sortDir=${sortDir}&query=${query}`,
+    { headers: authHeader() } );
   }
 
   getUserBoard() {

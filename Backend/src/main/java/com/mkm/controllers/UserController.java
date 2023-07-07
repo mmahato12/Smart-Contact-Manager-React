@@ -7,6 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,8 +43,9 @@ public class UserController {
         this.userRepository = userRepository;
     }
     
+	@PreAuthorize("hasRole('USER')")
     @PutMapping("/data/{userId}")
-	public ResponseEntity<User> Updatecontact(@RequestPart(value="Image", required=false) MultipartFile image, @RequestPart("data") UserDto userDto, @PathVariable("userId") Integer userId) throws IOException {
+	public ResponseEntity<User> UpdateUser(@RequestPart(value="Image", required=false) MultipartFile image, @RequestPart("data") UserDto userDto, @PathVariable("userId") Integer userId) throws IOException {
 		Optional<User> user = userRepository.findById(userId);
 		System.out.println(userId);
 		System.out.println(userDto);
@@ -62,25 +66,34 @@ public class UserController {
 
         return ResponseEntity.ok(user.get());
 	}
-
+	
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/data")
-	public List<User> contacts() {
+	public List<User> Users() {
 		List<User> list = this.userRepository.findAll();
 		return list;
 	}
-
+	
+	@PreAuthorize("hasRole('USER')")
 	@DeleteMapping("/data/{userId}")
-	public void Deletecontact(@PathVariable("userId") Integer userId) throws IOException {
+	public void DeleteUser(@PathVariable("userId") Integer userId) throws IOException {
 		Optional<User> data = this.userRepository.findById(userId);
 		
 		FileUploadUtil.deleteFile(data.get().getImagePath());
 		userRepository.deleteById(userId);
 	}
-
+	
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/data/{userId}")
-	public User contacts(@PathVariable("userId") Integer userId) {
+	public User Users(@PathVariable("userId") Integer userId) {
 		Optional<User> data = this.userRepository.findById(userId);
 		data.get().setPassword("");
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Optional <User> user = userRepository.findByUsername(auth.getName());
+		
+		if(user.get().getId() != userId)
+			return null;
 		return data.isPresent() ? data.get() : null;
 	}
 }
